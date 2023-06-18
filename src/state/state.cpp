@@ -13,7 +13,22 @@
  */
 int State::evaluate(){
   // [TODO] design your own evaluation function
-  return 0;
+  int Wvalue=0,Bvalue=0;
+  int score[7]={0,10,32,34,36,100,10000};
+  for(int i=0; i<BOARD_H; i++){
+    for(int j=0; j<BOARD_W; j++){
+      Wvalue+=score[board.board[0][i][j]];
+    }
+  }
+  for(int i=0; i<BOARD_H; i++){
+    for(int j=0; j<BOARD_W; j++){
+      Bvalue+=score[board.board[1][i][j]];
+    }
+  }
+  if(!this->player)
+    return Wvalue-Bvalue;
+  else
+    return Bvalue-Wvalue;
 }
 
 

@@ -11,10 +11,119 @@
  * 
  * @return int 
  */
+const int pawn_score[30]=
+{
+  20,20,20,20,20,
+  12,14,16,14,12,
+  12,7,12,7,12,
+  3,5,7,5,3,
+  1,1,1,1,1,
+  0,0,0,0,0
+};
+const int knight_score[30]=
+{
+  6,7,9,7,6,
+  7,9,12,9,7,
+  9,12,15,12,9,
+  9,12,9,12,9,
+  7,9,12,9,7,
+  6,7,9,7,6
+};
+const int rook_score[30]=
+{
+  14,14,14,14,14,
+  14,14,14,14,14,
+  11,11,11,11,11,
+  11,11,11,11,11,
+  11,11,11,11,11,
+  6,6,6,6,6
+};
+const int bishop_score[30]=
+{
+  0,8,0,8,0,
+  8,0,11,0,8,
+  0,16,0,16,0,
+  10,0,16,0,10,
+  0,14,0,14,0,
+  8,0,6,0,8
+};
+const int queen_score[30]=
+{
+  22,22,22,22,22,
+  22,22,22,22,22,
+  22,25,29,25,22,
+  22,25,25,25,22,
+  22,22,22,22,22,
+  20,20,20,20,20
+};
+
 int State::evaluate(){
   // [TODO] design your own evaluation function
   int Wvalue=0,Bvalue=0;
-  int score[7]={0,10,32,34,36,100,10000};
+  //int score[7]={0,10,32,34,36,100,10000};
+  for(int i=0; i<BOARD_H; i++){
+    for(int j=0; j<BOARD_W; j++){
+      switch(board.board[0][i][j]){
+        case 1: //pawn
+          Wvalue+=pawn_score[5*i+j];
+          break;
+        case 2: //rook
+          Wvalue+=rook_score[5*i+j];
+          break;
+        case 3: //knight
+          Wvalue+=knight_score[5*i+j];
+          break;
+        case 4: //bishop
+          Wvalue+=bishop_score[5*i+j];
+          break;
+        case 5: //queen
+          Wvalue+=queen_score[5*i+j];
+          break;
+        case 6: //king
+          Wvalue+=10000;
+          break;
+        default:
+          Wvalue+=0;
+          break;
+      }
+    }
+  }
+  for(int i=0; i<BOARD_H; i++){
+    for(int j=0; j<BOARD_W; j++){
+      switch(board.board[1][i][j]){
+        case 1: //pawn
+          Bvalue+=pawn_score[5*(5-i)+(4-j)];
+          break;
+        case 2: //rook
+          Bvalue+=rook_score[5*(5-i)+(4-j)];
+          break;
+        case 3: //knight
+          Bvalue+=knight_score[5*(5-i)+(4-j)];
+          break;
+        case 4: //bishop
+          Bvalue+=bishop_score[5*(5-i)+(4-j)];
+          break;
+        case 5: //queen
+          Bvalue+=queen_score[5*i+j];
+          break;
+        case 6: //king
+          Bvalue+=10000;
+          break;
+        default:
+          Bvalue+=0;
+          break;
+      }
+    }
+  }
+  if(!this->player)
+    return Wvalue-Bvalue;
+  else
+    return Bvalue-Wvalue;
+}
+int State::evaluate2(){
+  // [TODO] design your own evaluation function
+  int Wvalue=0,Bvalue=0;
+  int score[7]={0,2,6,7,8,20,10000};
   for(int i=0; i<BOARD_H; i++){
     for(int j=0; j<BOARD_W; j++){
       Wvalue+=score[board.board[0][i][j]];
@@ -30,7 +139,6 @@ int State::evaluate(){
   else
     return Bvalue-Wvalue;
 }
-
 
 /**
  * @brief return next state after the move
@@ -222,7 +330,7 @@ void State::get_legal_actions(){
       }
     }
   }
-  std::cout << "\n";
+  //std::cout << "\n";
   this->legal_actions = all_actions;
 }
 

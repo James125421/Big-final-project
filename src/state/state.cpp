@@ -53,7 +53,7 @@ const int queen_score[30]=
   26,26,26,26,26,
   23,26,30,26,23,
   26,26,23,26,26,
-  26,23,20,23,26,
+  23,23,20,23,23,
   20,20,20,20,20
 };
 
@@ -79,7 +79,7 @@ int State::evaluate(){
           Wvalue+=bishop_score[5*i+j];
           break;
         case 5: //queen
-          Wvalue+=queen_score[5*i+j]+3;
+          Wvalue+=queen_score[5*i+j];
           break;
         case 6: //king
           Wvalue+=1000000;
@@ -106,7 +106,7 @@ int State::evaluate(){
           Bvalue+=bishop_score[5*(5-i)+(4-j)];
           break;
         case 5: //queen
-          Bvalue+=queen_score[5*(5-i)+(4-j)]+3;
+          Bvalue+=queen_score[5*(5-i)+(4-j)];
           break;
         case 6: //king
           Bvalue+=1000000;

@@ -9,5 +9,5 @@
 class Alpha_beta_Basic{
 public:
   static Move get_move(State *state, int depth,int step);
-  static int get_value(State *state, int depth,int alpha,int beta,bool player);
+  static int get_value(State *state, int depth,int alpha,int beta,bool player,int step);
 };

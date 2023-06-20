@@ -47,7 +47,7 @@ int Alpha_beta_Basic::get_value(State *state, int depth,int alpha,int beta,bool 
             return state->evaluate2();
         else 
             return state->evaluate();
-        }
+    }
     if(player){
         value=-1e8;
         auto actions = state->legal_actions;

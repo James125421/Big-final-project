@@ -26,8 +26,6 @@ void read_board(std::ifstream& fin) {
 }
 
 void write_valid_spot(std::ofstream& fout) {
-  // Keep updating the output until getting killed.
-  int depth=1;
   step++;
   while(true) {
     //while(true){
@@ -36,7 +34,6 @@ void write_valid_spot(std::ofstream& fout) {
           << move.second.first << " " << move.second.second << std::endl;
     //}
     fout.flush();
-    depth++;
     break;
   }
   

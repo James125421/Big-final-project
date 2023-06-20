@@ -24,7 +24,7 @@ Move Alpha_beta::get_move(State *state, int depth,int step){
     memset(multans,-1,20);
     for(auto it=actions.begin();it!=actions.end();it++){
         id++;
-        int tmpValue=get_value(state->next_state(*it),std::min(depth,50-2*step-(1-state->player)),-1e8,1e8,false);
+        int tmpValue=get_value(state->next_state(*it),std::min(depth,50-2*step-(1-state->player)),-1e8,1e8,false,step);
         if(Value < tmpValue){
             multnum=0;
             memset(multans,-1,20);
@@ -40,15 +40,19 @@ Move Alpha_beta::get_move(State *state, int depth,int step){
     //return actions[(rand()+depth)%actions.size()];
 }
 
-int Alpha_beta::get_value(State *state, int depth,int alpha,int beta,bool player){
+int Alpha_beta::get_value(State *state, int depth,int alpha,int beta,bool player,int step){
     int value;
-    if(!depth || !state->legal_actions.size())
-        return state->evaluate();
+    if(!depth || !state->legal_actions.size()){
+        if(50-2*step-(1-state->player)<=4)
+            return state->evaluate2();
+        else 
+            return state->evaluate();
+    }
     if(player){
         value=-1e8;
         auto actions = state->legal_actions;
         for(auto it=actions.begin();it!=actions.end();it++){
-            value=std::max(value,get_value(state->next_state(*it),depth-1,alpha,beta,false));
+            value=std::max(value,get_value(state->next_state(*it),depth-1,alpha,beta,false,step));
             alpha=std::max(alpha,value);
             if(alpha>=beta)
                 break;
@@ -59,7 +63,7 @@ int Alpha_beta::get_value(State *state, int depth,int alpha,int beta,bool player
         value=1e8;
         auto actions = state->legal_actions;
         for(auto it=actions.begin();it!=actions.end();it++){
-            value=std::min(value,get_value(state->next_state(*it),depth-1,alpha,beta,true));
+            value=std::min(value,get_value(state->next_state(*it),depth-1,alpha,beta,true,step));
             beta=std::min(beta,value);
             if(alpha>=beta)
                 break;

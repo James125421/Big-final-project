@@ -4,13 +4,8 @@
 #include "./test.hpp"
 
 
-/**
- * @brief Randomly get a legal action
- * 
- * @param state Now state
- * @param depth You may need this for other policy
- * @return Move 
- */
+//測試用，內容為 state value function 「未」依據棋子所在位置做加權的 alphabeta
+
 Move Test::get_move(State *state, int depth){
     int Value=-1e8;
     if(!state->legal_actions.size())

@@ -13,10 +13,10 @@
  */
 const int pawn_score[30]=
 {
-  20,20,20,20,20,
-  12,14,16,14,12,
-  12,9,12,9,12,
-  3,5,7,5,3,
+  25,25,25,25,25,
+  7,9,11,9,7,
+  5,6,5,6,5,
+  4,3,4,3,4,
   1,1,1,1,1,
   0,0,0,0,0
 };
@@ -24,7 +24,7 @@ const int knight_score[30]=
 {
   6,7,9,7,6,
   7,9,12,9,7,
-  9,12,16,12,9,
+  9,16,14,16,9,
   9,12,9,12,9,
   7,9,12,9,7,
   6,7,9,7,6
@@ -44,7 +44,7 @@ const int bishop_score[30]=
   8,0,8,0,8,
   0,11,0,11,0,
   18,0,15,0,18,
-  0,15,0,15,0,
+  0,18,0,18,0,
   8,0,6,0,8
 };
 const int queen_score[30]=
@@ -79,7 +79,7 @@ int State::evaluate(){
           Wvalue+=bishop_score[5*i+j];
           break;
         case 5: //queen
-          Wvalue+=queen_score[5*i+j];
+          Wvalue+=queen_score[5*i+j]+3;
           break;
         case 6: //king
           Wvalue+=1000000;
@@ -106,7 +106,7 @@ int State::evaluate(){
           Bvalue+=bishop_score[5*(5-i)+(4-j)];
           break;
         case 5: //queen
-          Bvalue+=queen_score[5*(5-i)+(4-j)];
+          Bvalue+=queen_score[5*(5-i)+(4-j)]+3;
           break;
         case 6: //king
           Bvalue+=1000000;

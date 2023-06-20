@@ -24,7 +24,7 @@ Move Alpha_beta_Basic::get_move(State *state, int depth,int step){
     memset(multans,-1,20);
     for(auto it=actions.begin();it!=actions.end();it++){
         id++;
-        int tmpValue=get_value(state->next_state(*it),depth,-1e8,1e8,false);
+        int tmpValue=get_value(state->next_state(*it),std::min(depth,50-2*step-(1-state->player)),-1e8,1e8,false);
         if(Value < tmpValue){
             multnum=0;
             memset(multans,-1,20);

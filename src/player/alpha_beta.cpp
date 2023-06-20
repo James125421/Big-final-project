@@ -5,7 +5,7 @@
 #include "../state/state.hpp"
 #include "../policy/alpha_beta.hpp"
 State* root;
-
+int step=0;
 void read_board(std::ifstream& fin) {
   Board board;
   int player;
@@ -28,9 +28,10 @@ void read_board(std::ifstream& fin) {
 void write_valid_spot(std::ofstream& fout) {
   // Keep updating the output until getting killed.
   int depth=1;
+  step++;
   while(true) {
     while(true){
-      auto move = Alpha_beta::get_move(root, depth);
+      auto move = Alpha_beta::get_move(root, depth,step);
       fout << move.first.first << " " << move.first.second << " "\
           << move.second.first << " " << move.second.second << std::endl;
     }

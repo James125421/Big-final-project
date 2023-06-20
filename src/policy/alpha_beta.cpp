@@ -12,7 +12,7 @@
  * @param depth You may need this for other policy
  * @return Move 
  */
-Move Alpha_beta::get_move(State *state, int depth){
+Move Alpha_beta::get_move(State *state, int depth,int step){
     int Value=-1e8;
     if(!state->legal_actions.size())
         state->get_legal_actions();
@@ -24,7 +24,7 @@ Move Alpha_beta::get_move(State *state, int depth){
     memset(multans,-1,20);
     for(auto it=actions.begin();it!=actions.end();it++){
         id++;
-        int tmpValue=get_value(state->next_state(*it),depth,-1e8,1e8,false);
+        int tmpValue=get_value(state->next_state(*it),std::min(depth,26-step),-1e8,1e8,false);
         if(Value < tmpValue){
             multnum=0;
             memset(multans,-1,20);

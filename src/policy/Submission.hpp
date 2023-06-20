@@ -6,7 +6,7 @@
  * @brief Policy class for random policy, 
  * your policy class should have get_move method
  */
-class Alpha_beta_Basic{
+class Alpha_beta{
 public:
   static Move get_move(State *state, int depth,int step);
   static int get_value(State *state, int depth,int alpha,int beta,bool player,int step);

@@ -2,7 +2,7 @@
 #include <set>
 #include <cstring>
 #include "../state/state.hpp"
-#include "./alpha_beta.hpp"
+#include "./alphabeta.hpp"
 
 
 /**
@@ -12,7 +12,7 @@
  * @param depth You may need this for other policy
  * @return Move 
  */
-Move Alpha_beta::get_move(State *state, int depth,int step){
+Move Alpha_beta_Basic::get_move(State *state, int depth,int step){
     int Value=-1e8;
     if(!state->legal_actions.size())
         state->get_legal_actions();
@@ -40,7 +40,7 @@ Move Alpha_beta::get_move(State *state, int depth,int step){
     //return actions[(rand()+depth)%actions.size()];
 }
 
-int Alpha_beta::get_value(State *state, int depth,int alpha,int beta,bool player,int step){
+int Alpha_beta_Basic::get_value(State *state, int depth,int alpha,int beta,bool player,int step){
     int value;
     if(!depth || !state->legal_actions.size()){
         if(50-2*step-(1-state->player)<=4)

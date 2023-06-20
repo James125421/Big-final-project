@@ -3,7 +3,7 @@
 
 #include "../config.hpp"
 #include "../state/state.hpp"
-#include "../policy/alpha_beta.hpp"
+#include "../policy/alphabeta.hpp"
 State* root;
 int step=0;
 void read_board(std::ifstream& fin) {
@@ -26,14 +26,17 @@ void read_board(std::ifstream& fin) {
 }
 
 void write_valid_spot(std::ofstream& fout) {
+  // Keep updating the output until getting killed.
+  int depth=1;
   step++;
   while(true) {
-    //while(true){
-      auto move = Alpha_beta::get_move(root, 5,step);
+    while(depth<=5){
+      auto move = Alpha_beta_Basic::get_move(root, depth,step);
       fout << move.first.first << " " << move.first.second << " "\
           << move.second.first << " " << move.second.second << std::endl;
-    //}
+    }
     fout.flush();
+    depth++;
     break;
   }
   

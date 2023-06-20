@@ -26,17 +26,14 @@ void read_board(std::ifstream& fin) {
 }
 
 void write_valid_spot(std::ofstream& fout) {
-  // Keep updating the output until getting killed.
-  int depth=1;
   step++;
   while(true) {
-    while(true){
-      auto move = Alpha_beta_Basic::get_move(root, 5,step);
+    //while(true){
+      auto move = Alpha_beta::get_move(root, 5,step);
       fout << move.first.first << " " << move.first.second << " "\
           << move.second.first << " " << move.second.second << std::endl;
-    }
+    //}
     fout.flush();
-    depth++;
     break;
   }
   

@@ -30,11 +30,11 @@ void write_valid_spot(std::ofstream& fout) {
   int depth=1;
   step++;
   while(true) {
-    while(true){
+    //while(true){
       auto move = Alpha_beta::get_move(root, 5,step);
       fout << move.first.first << " " << move.first.second << " "\
           << move.second.first << " " << move.second.second << std::endl;
-    }
+    //}
     fout.flush();
     depth++;
     break;

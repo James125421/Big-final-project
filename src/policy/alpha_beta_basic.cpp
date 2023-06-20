@@ -12,7 +12,7 @@
  * @param depth You may need this for other policy
  * @return Move 
  */
-Move Alpha_beta_Basic::get_move(State *state, int depth){
+Move Alpha_beta_Basic::get_move(State *state, int depth,int step){
     int Value=-1e8;
     if(!state->legal_actions.size())
         state->get_legal_actions();

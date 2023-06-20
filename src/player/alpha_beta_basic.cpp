@@ -5,7 +5,7 @@
 #include "../state/state.hpp"
 #include "../policy/alpha_beta_basic.hpp"
 State* root;
-
+int step=0;
 void read_board(std::ifstream& fin) {
   Board board;
   int player;
@@ -27,16 +27,19 @@ void read_board(std::ifstream& fin) {
 
 void write_valid_spot(std::ofstream& fout) {
   // Keep updating the output until getting killed.
+  int depth=1;
+  step++;
   while(true) {
-    // Choose a random spot.
-    auto move = Alpha_beta_Basic::get_move(root, 3);
-    fout << move.first.first << " " << move.first.second << " "\
-         << move.second.first << " " << move.second.second << std::endl;
-    
-    // Remember to flush the output to ensure the last action is written to file.
+    while(true){
+      auto move = Alpha_beta_Basic::get_move(root, 5,step);
+      fout << move.first.first << " " << move.first.second << " "\
+          << move.second.first << " " << move.second.second << std::endl;
+    }
     fout.flush();
+    depth++;
     break;
   }
+  
 }
 
 int main(int, char** argv) {

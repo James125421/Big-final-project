@@ -3,7 +3,7 @@
 
 #include "../config.hpp"
 #include "../state/state.hpp"
-#include "../policy/alpha_beta_basic.hpp"
+#include "../policy/Submission.hpp"
 State* root;
 int step=0;
 void read_board(std::ifstream& fin) {

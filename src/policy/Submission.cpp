@@ -2,7 +2,7 @@
 #include <set>
 #include <cstring>
 #include "../state/state.hpp"
-#include "./alpha_beta_basic.hpp"
+#include "./Submission.hpp"
 
 
 /**
